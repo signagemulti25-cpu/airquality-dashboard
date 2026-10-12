@@ -373,7 +373,11 @@ class _AirQualityScreenState extends State<AirQualityScreen> {
                           // -----------------------------
                           // PM2.5
                           // -----------------------------
-                          AirQualityGauge(pm25: data.pm25, pm10: data.pm10),
+                          AirQualityGauge(
+                            pm25: data.pm25,
+                            pm10: data.pm10,
+                            aqi: data.aqi,
+                          ),
 
                           SizedBox(height: 18 * scale),
 
@@ -551,8 +555,13 @@ class AirQualityRingPainter extends CustomPainter {
 class AirQualityGauge extends StatelessWidget {
   final double pm25;
   final double pm10;
-
-  const AirQualityGauge({super.key, required this.pm25, required this.pm10});
+  final double aqi;
+  const AirQualityGauge({
+    super.key,
+    required this.pm25,
+    required this.pm10,
+    required this.aqi,
+  });
 
   Color getColor(double value) {
     if (value <= 50) {
@@ -597,7 +606,34 @@ class AirQualityGauge extends StatelessWidget {
               ),
             ),
           ),
-
+          // CENTER — AQI VALUE
+          Positioned.fill(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'AQI',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF202420),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    aqi.toStringAsFixed(0),
+                    style: TextStyle(
+                      fontSize: 44,
+                      fontWeight: FontWeight.w800,
+                      height: 1.0,
+                      color: getColor(aqi),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           // ==========================================
           // PM10 — RING START / BOTTOM LEFT
           // ==========================================
