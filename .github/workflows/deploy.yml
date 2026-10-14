@@ -30,8 +30,8 @@ jobs:
 
       - name: Build Flutter Web
         run: |
-          REPO="${GITHUB_REPOSITORY#*/}"
-          flutter build web --release --base-href "/${REPO}/"
+
+          flutter build web --release --base-href "/"
 
       - uses: actions/configure-pages@v5
 
