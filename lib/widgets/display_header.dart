@@ -22,7 +22,20 @@ class DisplayHeader extends StatelessWidget {
 
     return '$h:$minute $suffix';
   }
+  String _formatUpdatedTime(DateTime time) {
+    final localTime = time.toLocal();
 
+    final day = localTime.day.toString().padLeft(2, '0');
+    final month = localTime.month.toString().padLeft(2, '0');
+    final year = localTime.year;
+
+    final hour = localTime.hour % 12 == 0 ? 12 : localTime.hour % 12;
+
+    final minute = localTime.minute.toString().padLeft(2, '0');
+    final period = localTime.hour >= 12 ? 'PM' : 'AM';
+
+    return '$day/$month/$year $hour:$minute $period';
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -87,6 +100,13 @@ class DisplayHeader extends StatelessWidget {
                   'Last Updated: Today, ${_time()}',
                   style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
                 ),
+                Text(
+  'Last Updated: ${_formatUpdatedTime(updatedAt)}',
+  style: TextStyle(
+    fontSize: 16,
+    color: Colors.grey.shade700,
+  ),
+),
               ],
             ),
           ),
