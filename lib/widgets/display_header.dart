@@ -96,10 +96,7 @@ class DisplayHeader extends StatelessWidget {
 
                 const SizedBox(height: 2),
 
-                Text(
-                  'Last Updated: Today, ${_time()}',
-                  style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
-                ),
+              
                 Text(
   'Last Updated: ${_formatUpdatedTime(updatedAt)}',
   style: TextStyle(
