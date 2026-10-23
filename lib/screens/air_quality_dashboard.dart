@@ -535,13 +535,13 @@ class _LocationCard extends StatelessWidget {
                   const Spacer(),
 
                   if (data != null)
-                    Text(
-                      _formatUpdatedTime(data!.updatedAt),
-                      style: const TextStyle(
-                        fontSize: 8,
-                        color: Colors.white54,
-                      ),
-                    ),
+  Text(
+    _formatUpdatedTime(data!.updatedAt),
+    style: const TextStyle(
+      fontSize: 8,
+      color: Colors.white54,
+    ),
+  ),
 
                   const SizedBox(width: 8),
 
@@ -559,19 +559,23 @@ class _LocationCard extends StatelessWidget {
     );
   }
 
-  String _formatUpdatedTime(DateTime time) {
-    final localTime = time.toLocal();
+String _formatUpdatedTime(DateTime time) {
+  final localTime = time.toLocal();
 
-    final hour = localTime.hour % 12 == 0 ? 12 : localTime.hour % 12;
+  final day = localTime.day.toString().padLeft(2, '0');
+  final month = localTime.month.toString().padLeft(2, '0');
+  final year = localTime.year;
 
-    final minute = localTime.minute.toString().padLeft(2, '0');
+  final hour = localTime.hour % 12 == 0
+      ? 12
+      : localTime.hour % 12;
 
-    final second = localTime.second.toString().padLeft(2, '0');
+  final minute = localTime.minute.toString().padLeft(2, '0');
+  final second = localTime.second.toString().padLeft(2, '0');
+  final period = localTime.hour >= 12 ? 'PM' : 'AM';
 
-    final period = localTime.hour >= 12 ? 'PM' : 'AM';
-
-    return '$hour:$minute:$second $period';
-  }
+  return '$day/$month/$year $hour:$minute:$second $period';
+}
 
   Color _getStatusColor(int level) {
     switch (level) {
